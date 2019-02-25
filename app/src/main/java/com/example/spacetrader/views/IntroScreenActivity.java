@@ -1,5 +1,6 @@
 package com.example.spacetrader.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -63,6 +64,7 @@ public class IntroScreenActivity extends AppCompatActivity {
         difficultySpinner.setAdapter(difficultyAdapter);
 
         final Button submit = findViewById(R.id.submit);
+        final Intent loadingIntent = new Intent(this, GenerateUniverseActivity.class);
 
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -76,6 +78,7 @@ public class IntroScreenActivity extends AppCompatActivity {
                     invalid.setText("");
                     createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
                 }
+                startActivity(loadingIntent);
             }
         });
     }
