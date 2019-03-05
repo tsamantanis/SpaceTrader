@@ -10,7 +10,7 @@ public class Player {
 
     private int credits;
 
-    private String spaceship;
+    private Spaceship spaceship;
 
     private String weapon;
 
@@ -21,7 +21,7 @@ public class Player {
         this.skillDistribution = skillDistribution;
         this.difficulty = difficulty;
         this.credits = 1000;
-        this.spaceship = "Second Hand Gnat";
+        this.spaceship = new Spaceship();
         this.weapon = "pulse laser";
         this.location = "Local GGF space port";
     }
@@ -59,10 +59,10 @@ public class Player {
     }
 
     public String getSpaceship() {
-        return spaceship;
+        return spaceship.getName();
     }
 
-    public void setSpaceship(String spaceship) {
+    public void setSpaceship(Spaceship spaceship) {
         this.spaceship = spaceship;
     }
 
