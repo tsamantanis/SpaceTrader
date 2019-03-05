@@ -70,8 +70,8 @@ public class IntroScreenActivity extends AppCompatActivity {
                 skillDis[1] = Integer.parseInt((String) fighterSpinner.getSelectedItem());
                 skillDis[2] = Integer.parseInt((String) traderSpinner.getSelectedItem());
                 skillDis[3] = Integer.parseInt((String) engineerSpinner.getSelectedItem());
-                if(skillDis[0] + skillDis[1] + skillDis[2] + skillDis[3] > 16) {
-                    invalid.setText("Too many points assigned!");
+                if(skillDis[0] + skillDis[1] + skillDis[2] + skillDis[3] != 16) {
+                    invalid.setText("Points improperly assigned.");
                 } else {
                     invalid.setText("");
                     createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
