@@ -65,6 +65,7 @@ public class IntroScreenActivity extends AppCompatActivity {
 
         final Button submit = findViewById(R.id.submit);
         final Intent loadingIntent = new Intent(this, GenerateUniverseActivity.class);
+        final Intent marketplaceIntent = new Intent(this, MarketplaceActivity.class);
 
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -79,6 +80,7 @@ public class IntroScreenActivity extends AppCompatActivity {
                     createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
                 }
                 startActivity(loadingIntent);
+                startActivity(marketplaceIntent);
             }
         });
     }
