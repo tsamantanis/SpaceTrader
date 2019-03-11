@@ -65,8 +65,8 @@ public class IntroScreenActivity extends AppCompatActivity {
         difficultySpinner.setAdapter(difficultyAdapter);
 
         final Button submit = findViewById(R.id.submit);
-        final Intent marketplaceIntent = new Intent(this, MarketplaceActivity.class);
-
+        // TODO: use universe screen instead
+        final Intent planetScreenIntent = new Intent(this, PlanetScreenActivity.class);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 skillDis[0] = Integer.parseInt((String) pilotSpinner.getSelectedItem());
@@ -79,7 +79,7 @@ public class IntroScreenActivity extends AppCompatActivity {
                     invalid.setText("");
                     generateUniverse();
                     createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
-                    startActivity(marketplaceIntent);
+                    startActivity(planetScreenIntent);
                 }
             }
         });
