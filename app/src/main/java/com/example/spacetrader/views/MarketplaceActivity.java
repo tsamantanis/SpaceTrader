@@ -36,12 +36,11 @@ public class MarketplaceActivity extends AppCompatActivity {
         shipGoods = new ArrayList<>();
         marketGoods = new ArrayList<>();
         player = Game.player;
-        Log.d(null, player.getName());
         shipGoodsSpinner = findViewById(R.id.shipGoodsSpinner);
         marketGoodsSpinner = findViewById(R.id.marketGoodsSpinner);
 
         errorMessage = findViewById(R.id.errorMessageText);
-        location = findViewById(R.id.location);
+        location = findViewById(R.id.locationText);
         location.setText("Location: " + player.getLocation());
 
         final Button sellButton = findViewById(R.id.sellButton);
