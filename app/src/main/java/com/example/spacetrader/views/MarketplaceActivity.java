@@ -124,28 +124,29 @@ public class MarketplaceActivity extends AppCompatActivity {
                         item = item2;
                     }
                 }
-                Game.marketPlace.sellItem(item);
-                credits.setText(Integer.toString(player.getCredits()));
-                cargoSpace.setText(Integer.toString(player.getSpaceship().getCargo().size())+"/"+Integer.toString(player.getSpaceship().getCargoSpace()));
+                if(Game.marketPlace.sellItem(item)) {
+                    credits.setText(Integer.toString(player.getCredits()));
+                    cargoSpace.setText(Integer.toString(player.getSpaceship().getCargo().size()) + "/" + Integer.toString(player.getSpaceship().getCargoSpace()));
 
-                marketGoods.add(item.getName());
-                marketGoodsAdapter.notifyDataSetChanged();
+                    marketGoods.add(item.getName());
+                    marketGoodsAdapter.notifyDataSetChanged();
 
-                shipGoods.remove(item.getName());
-                shipGoodsAdapter.notifyDataSetChanged();
+                    shipGoods.remove(item.getName());
+                    shipGoodsAdapter.notifyDataSetChanged();
 
-                if(shipGoodsSpinner.getSelectedItemPosition() != 0) {
-                    shipGoodsSpinner.setSelection(0, true);
-                } else {
-                    shipGoodsSpinner.setSelection(1, true);
-                }
+                    if (shipGoodsSpinner.getSelectedItemPosition() != 0) {
+                        shipGoodsSpinner.setSelection(0, true);
+                    } else {
+                        shipGoodsSpinner.setSelection(1, true);
+                    }
 
-                String shipGoods = (String) shipGoodsSpinner.getSelectedItem();
-                for (Item item2 : player.getSpaceship().getCargo()) {
-                    if(shipGoods == null) {
-                        shipGoodsPrice.setText(Integer.toString(0));
-                    } else if(shipGoods.equals(item2.getName())) {
-                        shipGoodsPrice.setText(Integer.toString(item2.getPrice()));
+                    String shipGoods = (String) shipGoodsSpinner.getSelectedItem();
+                    for (Item item2 : player.getSpaceship().getCargo()) {
+                        if (shipGoods == null) {
+                            shipGoodsPrice.setText(Integer.toString(0));
+                        } else if (shipGoods.equals(item2.getName())) {
+                            shipGoodsPrice.setText(Integer.toString(item2.getPrice()));
+                        }
                     }
                 }
             }

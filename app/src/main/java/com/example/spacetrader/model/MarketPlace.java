@@ -38,15 +38,20 @@ public class MarketPlace {
         return marketItems;
     }
 
-    public void sellItem(Item item) {
-        player.setCredits(player.getCredits() + item.getPrice());
-        marketItems.add(item);
-        player.getSpaceship().removeCargo(item);
+    public boolean sellItem(Item item) {
+        if(item != null) {
+            player.setCredits(player.getCredits() + item.getPrice());
+            marketItems.add(item);
+            player.getSpaceship().removeCargo(item);
+            return true;
+        }
+        return false;
     }
 
     public boolean buyItem(Item item) {
 
-        if (player.getCredits() - item.getPrice() >= 0 && player.getSpaceship().getCargo().size() != player.getSpaceship().getCargoSpace()) {
+        if (item != null && player.getCredits() - item.getPrice() >= 0
+                && player.getSpaceship().getCargo().size() != player.getSpaceship().getCargoSpace()) {
             player.setCredits(player.getCredits() - item.getPrice());
             player.getSpaceship().addCargo(item);
             marketItems.remove(item);
