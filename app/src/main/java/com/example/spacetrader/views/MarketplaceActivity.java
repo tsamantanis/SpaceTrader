@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.example.spacetrader.R;
 import com.example.spacetrader.model.Item;
 
+import com.example.spacetrader.entity.Player;
+
 public class MarketplaceActivity extends AppCompatActivity {
     private Spinner shipGoodsSpinner;
     private Spinner marketGoodsSpinner;
@@ -19,17 +21,26 @@ public class MarketplaceActivity extends AppCompatActivity {
     private Item[] marketGoods;
 
     private TextView errorMessage;
+    private TextView location;
+
+    protected static Player player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.marketplace_screen);
+<<<<<<< HEAD
 
 
+=======
+        
+>>>>>>> 48c148fbd0c3ff0ba1bc7e7896e43fc7992cc546
         shipGoodsSpinner = findViewById(R.id.shipGoodsSpinner);
         marketGoodsSpinner = findViewById(R.id.marketGoodsSpinner);
 
         errorMessage = findViewById(R.id.errorMessageText);
+        location = findViewById(R.id.location);
+        location.setText("Location: " + player.getLocation());
 
         final Button sellButton = findViewById(R.id.sellButton);
         final Button buyButton = findViewById(R.id.buyButton);
