@@ -58,8 +58,8 @@ public class Player {
         this.credits = credits;
     }
 
-    public String getSpaceship() {
-        return spaceship.getName();
+    public Spaceship getSpaceship() {
+        return spaceship;
     }
 
     public void setSpaceship(Spaceship spaceship) {

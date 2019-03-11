@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.spacetrader.R;
 
-import static com.example.spacetrader.views.MainActivity.createPlayer;
+import static com.example.spacetrader.entity.Game.createPlayer;
 
 public class IntroScreenActivity extends AppCompatActivity {
     private Spinner pilotSpinner;
