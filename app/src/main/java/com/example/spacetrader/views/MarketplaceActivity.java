@@ -25,7 +25,6 @@ public class MarketplaceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.marketplace_screen);
 
-        System.out.println("TESTTTTTT");
 
         shipGoodsSpinner = findViewById(R.id.shipGoodsSpinner);
         marketGoodsSpinner = findViewById(R.id.marketGoodsSpinner);
