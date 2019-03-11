@@ -13,6 +13,7 @@ public class Item {
     private String ER;
     private int MTL;
     private int MTH;
+    private int price;
 
     public Item (String name, int MTLP, int MTLU, int TTP, int basePrice, int IPL,
                  int variance, String IE, String CR, String ER, int MTL, int MTH) {
@@ -28,12 +29,21 @@ public class Item {
         this.ER = ER;
         this.MTL = MTL;
         this.MTH = MTH;
+        price = calculatePrice();
     }
 
-    public double calculatePrice() {
+    public int calculatePrice() {
         if (Math.random() >= 0.5) {
-            return basePrice + IPL*(TTP - MTLP) + Math.random() * (variance * 0.1 + 1);
+            return (int)(basePrice + IPL*(TTP - MTLP) + Math.random() * (variance * 0.1 + 1));
         }
-        return basePrice + IPL*(TTP - MTLP) - Math.random() * (variance * 0.1 + 1);
+        return (int) (basePrice + IPL*(TTP - MTLP) - Math.random() * (variance * 0.1 + 1));
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

@@ -1,11 +1,16 @@
 package com.example.spacetrader.model;
 
+import com.example.spacetrader.entity.Player;
+import com.example.spacetrader.entity.Spaceship;
+
 import java.util.ArrayList;
 
 public class MarketPlace {
     private ArrayList<Item> marketItems;
 
-    public MarketPlace() {
+    protected static Player player;
+    public MarketPlace(Player player) {
+        marketItems = new ArrayList<>();
         marketItems.add(new Item("Water", 0, 0, 2, 30, 3,
                 4, "Drought", "Lots of Water", "Desert", 30, 50));
         marketItems.add(new Item("Furs", 0, 0, 0, 250, 10,
@@ -26,17 +31,32 @@ public class MarketPlace {
                 150, "Boredom", "Weird Mushrooms", "Never", 2000, 3000));
         marketItems.add(new Item("Robots", 6, 4, 7, 5000, -150,
                 100, "Lack of Workers", "Never", "Never", 3500, 5000));
+        this.player = player;
     }
 
     public ArrayList<Item> getMarketItems() {
         return marketItems;
     }
 
-    public void sellItems() {
-
+    public boolean sellItem(Item item) {
+        if(item != null) {
+            player.setCredits(player.getCredits() + item.getPrice());
+            marketItems.add(item);
+            player.getSpaceship().removeCargo(item);
+            return true;
+        }
+        return false;
     }
 
-    public void buyItems() {
-        
+    public boolean buyItem(Item item) {
+
+        if (item != null && player.getCredits() - item.getPrice() >= 0
+                && player.getSpaceship().getCargo().size() != player.getSpaceship().getCargoSpace()) {
+            player.setCredits(player.getCredits() - item.getPrice());
+            player.getSpaceship().addCargo(item);
+            marketItems.remove(item);
+            return true;
+        }
+        return false;
     }
 }

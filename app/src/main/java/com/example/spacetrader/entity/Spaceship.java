@@ -1,7 +1,5 @@
 package com.example.spacetrader.entity;
 
-import android.widget.Space;
-
 import com.example.spacetrader.model.Item;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ public class Spaceship {
 
     public Spaceship() {
         name = "Second Hand Gnat";
-        cargoSpace = 15;
+        cargoSpace = 3;
         cargo = new ArrayList<>();
     }
 

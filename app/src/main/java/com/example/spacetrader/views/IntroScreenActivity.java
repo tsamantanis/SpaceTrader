@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 import com.example.spacetrader.R;
 
-import static com.example.spacetrader.views.MainActivity.createPlayer;
+import static com.example.spacetrader.entity.Game.createPlayer;
+import static com.example.spacetrader.views.MainActivity.generateUniverse;
 
 public class IntroScreenActivity extends AppCompatActivity {
     private Spinner pilotSpinner;
@@ -64,9 +65,8 @@ public class IntroScreenActivity extends AppCompatActivity {
         difficultySpinner.setAdapter(difficultyAdapter);
 
         final Button submit = findViewById(R.id.submit);
-        final Intent loadingIntent = new Intent(this, GenerateUniverseActivity.class);
-        final Intent marketplaceIntent = new Intent(this, MarketplaceActivity.class);
-
+        // TODO: use universe screen instead
+        final Intent planetScreenIntent = new Intent(this, PlanetScreenActivity.class);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 skillDis[0] = Integer.parseInt((String) pilotSpinner.getSelectedItem());
@@ -77,10 +77,10 @@ public class IntroScreenActivity extends AppCompatActivity {
                     invalid.setText("Points improperly assigned.");
                 } else {
                     invalid.setText("");
+                    generateUniverse();
                     createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
+                    startActivity(planetScreenIntent);
                 }
-                startActivity(loadingIntent);
-                startActivity(marketplaceIntent);
             }
         });
     }

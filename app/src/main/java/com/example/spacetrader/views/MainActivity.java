@@ -45,19 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static void createPlayer(String name, int[] skillDistribution, String difficulty) {
-        player = new Player(name, skillDistribution, difficulty);
-        Log.i("Name: ", player.getName());
-        Log.i("Credits: ", Integer.toString(player.getCredits()));
-        Log.i("Difficulty: ", player.getDifficulty());
-        Log.i("Location: ", player.getLocation());
-        Log.i("Spaceship: ", player.getSpaceship());
-        Log.i("Weapon: ", player.getWeapon());
-        Log.i("Pilot: ", Integer.toString(player.getSkillDistribution()[0]));
-        Log.i("Fighter: ", Integer.toString(player.getSkillDistribution()[1]));
-        Log.i("Trader: ", Integer.toString(player.getSkillDistribution()[2]));
-        Log.i("Engineer: ", Integer.toString(player.getSkillDistribution()[3]));
-    }
 
     public static void generateUniverse() {
         aegon = new Aegon();
