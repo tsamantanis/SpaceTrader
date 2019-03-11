@@ -2,6 +2,7 @@ package com.example.spacetrader.views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -9,16 +10,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.spacetrader.R;
+import com.example.spacetrader.entity.Game;
 import com.example.spacetrader.model.Item;
 
 import com.example.spacetrader.entity.Player;
+
+import java.util.ArrayList;
 
 public class MarketplaceActivity extends AppCompatActivity {
     private Spinner shipGoodsSpinner;
     private Spinner marketGoodsSpinner;
 
-    private Item[] shipGoods;
-    private Item[] marketGoods;
+    private ArrayList<String> shipGoods;
+    private ArrayList<String> marketGoods;
 
     private TextView errorMessage;
     private TextView location;
@@ -29,7 +33,10 @@ public class MarketplaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.marketplace_screen);
-
+        shipGoods = new ArrayList<>();
+        marketGoods = new ArrayList<>();
+        player = Game.player;
+        Log.d(null, player.getName());
         shipGoodsSpinner = findViewById(R.id.shipGoodsSpinner);
         marketGoodsSpinner = findViewById(R.id.marketGoodsSpinner);
 
@@ -40,13 +47,17 @@ public class MarketplaceActivity extends AppCompatActivity {
         final Button sellButton = findViewById(R.id.sellButton);
         final Button buyButton = findViewById(R.id.buyButton);
 
-        shipGoods = new Item[10]; //add in the ship goods here later
-        marketGoods = new Item[10]; //add in the market goods here later
+        for (Item item : player.getSpaceship().getCargo()) {
+            shipGoods.add(item.getName());
+        }
+        for (Item item : Game.marketPlace.getMarketItems()) {
+            marketGoods.add(item.getName());
+        }
 
-        ArrayAdapter<Item> shipGoodsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, shipGoods);
+        ArrayAdapter<String> shipGoodsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, shipGoods);
         shipGoodsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        ArrayAdapter<Item> marketGoodsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, marketGoods);
+        ArrayAdapter<String> marketGoodsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, marketGoods);
         shipGoodsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         shipGoodsSpinner.setAdapter(shipGoodsAdapter);

@@ -36,4 +36,8 @@ public class Item {
         }
         return basePrice + IPL*(TTP - MTLP) - Math.random() * (variance * 0.1 + 1);
     }
+
+    public String getName() {
+        return name;
+    }
 }

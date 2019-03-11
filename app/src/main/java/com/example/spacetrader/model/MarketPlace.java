@@ -10,6 +10,7 @@ public class MarketPlace {
 
     protected static Player player;
     public MarketPlace(Player player) {
+        marketItems = new ArrayList<>();
         marketItems.add(new Item("Water", 0, 0, 2, 30, 3,
                 4, "Drought", "Lots of Water", "Desert", 30, 50));
         marketItems.add(new Item("Furs", 0, 0, 0, 250, 10,
