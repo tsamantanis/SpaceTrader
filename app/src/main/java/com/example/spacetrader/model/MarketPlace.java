@@ -39,14 +39,19 @@ public class MarketPlace {
     }
 
     public void sellItem(Item item) {
-        player.setCredits(player.getCredits() + (int) item.calculatePrice());
+        player.setCredits(player.getCredits() + item.getPrice());
         marketItems.add(item);
+        player.getSpaceship().removeCargo(item);
     }
 
-    public void buyItem(Item item) {
-        if (player.getCredits() - (int) item.calculatePrice() >= 0) {
-            player.setCredits(player.getCredits() - (int) item.calculatePrice());
+    public boolean buyItem(Item item) {
+
+        if (player.getCredits() - item.getPrice() >= 0 && player.getSpaceship().getCargo().size() != player.getSpaceship().getCargoSpace()) {
+            player.setCredits(player.getCredits() - item.getPrice());
             player.getSpaceship().addCargo(item);
+            marketItems.remove(item);
+            return true;
         }
+        return false;
     }
 }

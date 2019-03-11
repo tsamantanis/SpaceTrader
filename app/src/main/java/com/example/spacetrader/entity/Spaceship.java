@@ -14,7 +14,7 @@ public class Spaceship {
 
     public Spaceship() {
         name = "Second Hand Gnat";
-        cargoSpace = 15;
+        cargoSpace = 3;
         cargo = new ArrayList<>();
     }
 
