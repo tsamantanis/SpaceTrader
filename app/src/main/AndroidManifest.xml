@@ -12,7 +12,11 @@
         <activity
             android:name=".views.GenerateUniverseActivity"
             android:label="@string/title_activity_generate_universe"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.MarketplaceActivity"
+            android:label="@string/title_activity_marketplace"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,7 +1,5 @@
 package com.example.spacetrader.entity;
 
-import android.widget.Space;
-
 import com.example.spacetrader.model.Item;
 
 import java.util.ArrayList;
