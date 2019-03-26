@@ -20,16 +20,16 @@ public class Game {
     }
 
     public static void generateUniverse() {
-        planets.add(new Planet("Aegon"));
-        planets.add(new Planet("Aldea"));
-        planets.add(new Planet("Brax"));
-        planets.add(new Planet("Castor"));
-        planets.add(new Planet("Daenerys"));
-        planets.add(new Planet("Davlos"));
-        planets.add(new Planet("Fourmi"));
-        planets.add(new Planet("Kafka"));
-        planets.add(new Planet("Rhaegon"));
-        planets.add(new Planet("Zuul"));
+        planets.add(new Planet("Aegon", 10, 130));
+        planets.add(new Planet("Aldea", 55, 35));
+        planets.add(new Planet("Brax", 25, 75));
+        planets.add(new Planet("Castor", 65, 110));
+        planets.add(new Planet("Daenerys", 50, 70));
+        planets.add(new Planet("Davlos", 35, 85));
+        planets.add(new Planet("Fourmi", 55, 135));
+        planets.add(new Planet("Kafka", 75, 45));
+        planets.add(new Planet("Rhaegon", 20, 40));
+        planets.add(new Planet("Zuul", 8, 15));
     }
 
 }
