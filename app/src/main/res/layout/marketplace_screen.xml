@@ -151,7 +151,7 @@
         android:layout_marginStart="34dp"
         android:layout_marginLeft="34dp"
         android:layout_marginBottom="149dp"
-        android:text="Cargo Space Remaining:"
+        android:text="Current Cargo Space: "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
