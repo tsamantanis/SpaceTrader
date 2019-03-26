@@ -12,10 +12,13 @@ public class Spaceship {
 
     private ArrayList<Item> cargo;
 
+    private int fuel;
+
     public Spaceship() {
         name = "Second Hand Gnat";
         cargoSpace = 3;
         cargo = new ArrayList<>();
+        fuel = 1000;
     }
 
     public String getName() {
@@ -33,6 +36,10 @@ public class Spaceship {
     public void setCargoSpace(int cargoSpace) {
         this.cargoSpace = cargoSpace;
     }
+
+    public void setFuel(int fuel) { this.fuel = fuel; }
+
+    public int getFuel() { return fuel; }
 
 
     public ArrayList<Item> getCargo() {
