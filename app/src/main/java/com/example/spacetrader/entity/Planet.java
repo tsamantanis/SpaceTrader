@@ -1,17 +1,18 @@
-package com.example.spacetrader.entity.planets;
+package com.example.spacetrader.entity;
 
 import android.util.Log;
 
-public class Aegon {
-    public final String NAME = "Aegon";
+public class Planet {
+    public final String NAME;
     public final int X_COORDINATE = 10;
     public final int Y_COORDINATE = 130;
     public int TECH_LEVEL;
     public int RESOURCE_LEVEL;
 
-    public Aegon() {
-        this.TECH_LEVEL = (int) (Math.random() * ((7 - 0) + 1));
-        this.RESOURCE_LEVEL = (int) (Math.random() * ((12 - 0) + 1));
+    public Planet(String name) {
+        this.NAME = name;
+        this.TECH_LEVEL = (int) (Math.random() * 8);
+        this.RESOURCE_LEVEL = (int) (Math.random() * 13);
         Log.d(NAME, this.toString());
     }
 
