@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.entity.Game;
+import com.example.spacetrader.entity.Spaceship;
 import com.example.spacetrader.model.Item;
-
 import com.example.spacetrader.entity.Player;
 
 import java.util.ArrayList;
@@ -27,6 +27,8 @@ public class MarketplaceActivity extends AppCompatActivity {
 
     private TextView errorMessage;
     private TextView location;
+    private TextView fuelRemaining;
+    private TextView cargoHolds;
 
     private TextView shipGoodsPrice;
     private TextView marketGoodsPrice;
@@ -58,6 +60,9 @@ public class MarketplaceActivity extends AppCompatActivity {
         errorMessage = findViewById(R.id.errorMessageText);
         location = findViewById(R.id.locationText);
         location.setText("Location: " + player.getLocation());
+        fuelRemaining = findViewById(R.id.fuelRemainingText);
+        fuelRemaining.setText("Fuel Remaining: " + player.getSpaceship().getFuel());
+
 
         final Button sellButton = findViewById(R.id.sellButton);
         final Button buyButton = findViewById(R.id.buyButton);
