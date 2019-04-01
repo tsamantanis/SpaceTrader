@@ -14,7 +14,6 @@ public class Player {
 
     private String weapon;
 
-    private String location;
 
     public Player(String name, int[] skillDistribution, String difficulty) {
         this.name = name;
@@ -23,7 +22,6 @@ public class Player {
         this.credits = 1000;
         this.spaceship = new Spaceship();
         this.weapon = "pulse laser";
-        this.location = "Local GGF space port";
     }
 
     public String getName() {
@@ -74,11 +72,4 @@ public class Player {
         this.weapon = weapon;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 }
