@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.entity.Game;
@@ -188,6 +189,8 @@ public class MarketplaceActivity extends AppCompatActivity {
                     }
                     shipGoods.add(item2.getName());
                     shipGoodsAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getApplicationContext(),"Not Enough Credits!",Toast.LENGTH_SHORT).show();
                 }
             }
         });
