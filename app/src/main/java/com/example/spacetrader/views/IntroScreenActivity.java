@@ -75,8 +75,8 @@ public class IntroScreenActivity extends AppCompatActivity {
                     invalid.setText("Points improperly assigned.");
                 } else {
                     invalid.setText("");
-                    Game.createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
                     Game.generateUniverse();
+                    Game.createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
                     startActivity(planetScreenIntent);
                 }
             }

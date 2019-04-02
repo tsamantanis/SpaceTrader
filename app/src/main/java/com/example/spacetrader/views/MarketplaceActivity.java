@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.entity.Game;
@@ -59,7 +60,7 @@ public class MarketplaceActivity extends AppCompatActivity {
 
         errorMessage = findViewById(R.id.errorMessageText);
         location = findViewById(R.id.locationText);
-        location.setText("Location: " + player.getLocation());
+        location.setText("Location: " + Game.currentPlanet.getName());
         fuelRemaining = findViewById(R.id.fuelRemainingText);
         fuelRemaining.setText("Fuel Remaining: " + player.getSpaceship().getFuel());
 
@@ -188,6 +189,8 @@ public class MarketplaceActivity extends AppCompatActivity {
                     }
                     shipGoods.add(item2.getName());
                     shipGoodsAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getApplicationContext(),"Not Enough Credits!",Toast.LENGTH_SHORT).show();
                 }
             }
         });

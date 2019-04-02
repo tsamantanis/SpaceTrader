@@ -41,7 +41,6 @@ public class Spaceship {
 
     public int getFuel() { return fuel; }
 
-
     public ArrayList<Item> getCargo() {
         return cargo;
     }
