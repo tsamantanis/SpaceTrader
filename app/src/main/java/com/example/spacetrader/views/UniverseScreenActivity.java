@@ -97,7 +97,9 @@ public class UniverseScreenActivity extends AppCompatActivity {
                         }
                         Game.player.getSpaceship().setFuel(tempFuel);
                         List<Item> tempCargo = Game.player.getSpaceship().getCargo();
-                        tempCargo.remove(0);
+                        if (tempCargo.size() > 0) {
+                            tempCargo.remove(0);
+                        }
                         Game.player.getSpaceship().setCargo(tempCargo);
                     }
                     Toast.makeText(getApplicationContext(), events.get(random).getTitle() + "\n" + events.get(random).getDescription(),Toast.LENGTH_LONG).show();
