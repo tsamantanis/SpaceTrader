@@ -46,7 +46,7 @@ public class Spaceship {
         return cargo;
     }
 
-    public void setCargo(ArrayList<Item> cargo) {
+    public void setCargo(List<Item> cargo) {
         this.cargo = cargo;
     }
 
