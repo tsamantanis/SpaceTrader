@@ -1,23 +1,56 @@
 package com.example.spacetrader.entity;
 
-import android.media.Image;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.spacetrader.model.MarketPlace;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 public class Game {
     public static Player player;
     public static Planet currentPlanet;
     public static List<Planet> planets;
     public static MarketPlace marketPlace;
+    public static String playerID;
 
     public static void createPlayer(String name, int[] skillDistribution, String difficulty) {
         player = new Player(name, skillDistribution, difficulty);
         marketPlace = new MarketPlace(player, currentPlanet.getTechLevel());
-        // TODO: select planet from universe screen
+        savePlayer();
+    }
 
+    private static void savePlayer() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("players")
+                .add(player)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        playerID = documentReference.getId();
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + playerID);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 
     public static void generateUniverse() {
@@ -48,7 +81,5 @@ public class Game {
         player.getSpaceship().setFuel(currentFuel - calculateFuelPrice(planet));
         currentPlanet = planet;
     }
-
-
 
 }

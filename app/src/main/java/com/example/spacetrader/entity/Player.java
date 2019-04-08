@@ -1,10 +1,13 @@
 package com.example.spacetrader.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 
     private String name;
 
-    private int[] skillDistribution;
+    private List<Integer> skillDistribution;
 
     private String difficulty;
 
@@ -14,10 +17,14 @@ public class Player {
 
     private String weapon;
 
+    public Player() {}
 
     public Player(String name, int[] skillDistribution, String difficulty) {
         this.name = name;
-        this.skillDistribution = skillDistribution;
+        this.skillDistribution = new ArrayList<>();
+        for (int skill : skillDistribution) {
+            this.skillDistribution.add(skill);
+        }
         this.difficulty = difficulty;
         this.credits = 1000;
         this.spaceship = new Spaceship();
@@ -32,11 +39,11 @@ public class Player {
         this.name = name;
     }
 
-    public int[] getSkillDistribution() {
+    public List<Integer> getSkillDistribution() {
         return skillDistribution;
     }
 
-    public void setSkillDistribution(int[] skillDistribution) {
+    public void setSkillDistribution(List<Integer> skillDistribution) {
         this.skillDistribution = skillDistribution;
     }
 
