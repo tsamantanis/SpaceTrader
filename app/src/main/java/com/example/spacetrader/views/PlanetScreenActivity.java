@@ -36,7 +36,7 @@ public class PlanetScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planet_screen);
         planetLabel = findViewById(R.id.textView_currentPlanet);
-        if (player.getCurrentPlanet() != null) planetLabel.setText(new StringBuilder().append("Planet ").append(player.getCurrentPlanet().getName()));
+        if (player.getCurrentPlanet() != null) planetLabel.setText(new StringBuilder().append("Player: ").append(player.getName()));
 
         fuelRemaining = findViewById(R.id.textView_Fuel);
         fuelRemaining.setText("Fuel Remaining: " + player.getSpaceship().getFuel());
