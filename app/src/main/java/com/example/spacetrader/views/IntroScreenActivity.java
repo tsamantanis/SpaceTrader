@@ -63,7 +63,6 @@ public class IntroScreenActivity extends AppCompatActivity {
         difficultySpinner.setAdapter(difficultyAdapter);
 
         final Button submit = findViewById(R.id.submit);
-        // TODO: use universe screen instead
         final Intent planetScreenIntent = new Intent(this, PlanetScreenActivity.class);
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
