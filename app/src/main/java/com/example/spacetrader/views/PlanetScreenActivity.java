@@ -49,28 +49,10 @@ public class PlanetScreenActivity extends AppCompatActivity {
 
         saveButton = findViewById(R.id.saveGameButton);
         final Context context = this.getApplicationContext();
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("players")
-                        .document(Game.playerID)
-                        .set(Game.player)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d("TAG", "DocumentSnapshot successfully written!");
-                                Toast.makeText(context, "Game saved", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w("TAG", "Error writing document", e);
-                                Toast.makeText(context, "Game failed to saved", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                Game.savePlayer(context);
             }
         });
 

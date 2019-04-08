@@ -1,7 +1,9 @@
 package com.example.spacetrader.entity;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.spacetrader.model.MarketPlace;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,12 +32,8 @@ public class Game {
     public static void createPlayer(String name, int[] skillDistribution, String difficulty) {
         player = new Player(name, skillDistribution, difficulty);
         marketPlace = new MarketPlace(player, currentPlanet.getTechLevel());
-        savePlayer();
-    }
 
-    private static void savePlayer() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         db.collection("players")
                 .add(player)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -49,6 +47,27 @@ public class Game {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
+    public static void savePlayer(final Context context) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("players")
+                .document(Game.playerID)
+                .set(Game.player)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully written!");
+                        Toast.makeText(context, "Game saved", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error writing document", e);
+                        Toast.makeText(context, "Game failed to saved", Toast.LENGTH_LONG).show();
                     }
                 });
     }
