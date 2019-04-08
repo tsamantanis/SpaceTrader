@@ -25,6 +25,7 @@ public class Game {
     public static Planet currentPlanet;
     public static List<Planet> planets;
     public static MarketPlace marketPlace;
+    public static String playerID;
 
     public static void createPlayer(String name, int[] skillDistribution, String difficulty) {
         player = new Player(name, skillDistribution, difficulty);
@@ -34,20 +35,14 @@ public class Game {
 
     private static void savePlayer() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        Map<String, String> player = new HashMap<>();
-//        player.put("name", this.player.getName());
-//        player.put("skills", this.player.getSkillDistribution().toString());
-//        player.put("difficulty", this.player.getDifficulty());
-//        player.put("credits", this.player.getCredits() + "");
-//        player.put("weapon", this.player.getWeapon());
-//        player.put("spaceship")
 
         db.collection("players")
                 .add(player)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        playerID = documentReference.getId();
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + playerID);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -86,7 +81,5 @@ public class Game {
         player.getSpaceship().setFuel(currentFuel - calculateFuelPrice(planet));
         currentPlanet = planet;
     }
-
-
 
 }

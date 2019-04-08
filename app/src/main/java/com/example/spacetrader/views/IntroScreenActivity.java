@@ -80,7 +80,6 @@ public class IntroScreenActivity extends AppCompatActivity {
                     invalid.setText("");
                     Game.generateUniverse();
                     Game.createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
-                    File file = new File(context.getFilesDir(), name.getText().toString());
                     startActivity(planetScreenIntent);
                 }
             }

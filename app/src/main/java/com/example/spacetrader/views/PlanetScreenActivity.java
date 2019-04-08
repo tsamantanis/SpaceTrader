@@ -1,5 +1,6 @@
 package com.example.spacetrader.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.entity.Game;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -25,7 +29,7 @@ public class PlanetScreenActivity extends AppCompatActivity {
     private Button marketplaceButton;
     private TextView fuelRemaining;
     private Button travelButton;
-
+    private Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +47,36 @@ public class PlanetScreenActivity extends AppCompatActivity {
         travelButton = findViewById(R.id.button_travel);
         travelButton.setText("Travel");
 
-        final Intent marketplaceIntent = new Intent(this, MarketplaceActivity.class);
-        marketplaceButton.setOnClickListener(new View.OnClickListener() {
+        saveButton = findViewById(R.id.saveGameButton);
+        final Context context = this.getApplicationContext();
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("players")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        .document(Game.playerID)
+                        .set(Game.player)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Log.d("TAG", document.getId() + " => " + document.getData());
-                                    }
-                                } else {
-                                    Log.w("TAG", "Error getting documents.", task.getException());
-                                }
+                            public void onSuccess(Void aVoid) {
+                                Log.d("TAG", "DocumentSnapshot successfully written!");
+                                Toast.makeText(context, "Game saved", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("TAG", "Error writing document", e);
+                                Toast.makeText(context, "Game failed to saved", Toast.LENGTH_LONG).show();
                             }
                         });
+            }
+        });
+
+        final Intent marketplaceIntent = new Intent(this, MarketplaceActivity.class);
+        marketplaceButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 startActivity(marketplaceIntent);
             }
         });
