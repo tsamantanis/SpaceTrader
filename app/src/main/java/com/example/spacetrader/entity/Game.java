@@ -33,13 +33,16 @@ public class Game {
         player = new Player(name, skillDistribution, difficulty);
         marketPlace = new MarketPlace(player, currentPlanet.getTechLevel());
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("players")
                 .add(player)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         playerID = documentReference.getId();
+                        db.collection("players").document(playerID).update(
+                                "currentPlanet", currentPlanet
+                        );
                         Log.d(TAG, "DocumentSnapshot added with ID: " + playerID);
                     }
                 })
@@ -52,13 +55,16 @@ public class Game {
     }
 
     public static void savePlayer(final Context context) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("players")
                 .document(Game.playerID)
                 .set(Game.player)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        db.collection("players").document(playerID).update(
+                                "currentPlanet", currentPlanet
+                        );
                         Log.d("TAG", "DocumentSnapshot successfully written!");
                         Toast.makeText(context, "Game saved", Toast.LENGTH_LONG).show();
                     }
