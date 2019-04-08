@@ -1,5 +1,6 @@
 package com.example.spacetrader.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.spacetrader.R;
 import com.example.spacetrader.entity.Game;
+
+import java.io.File;
 
 public class IntroScreenActivity extends AppCompatActivity {
     private Spinner pilotSpinner;
@@ -64,6 +67,7 @@ public class IntroScreenActivity extends AppCompatActivity {
 
         final Button submit = findViewById(R.id.submit);
         final Intent planetScreenIntent = new Intent(this, PlanetScreenActivity.class);
+        final Context context = this.getApplicationContext();
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 skillDis[0] = Integer.parseInt((String) pilotSpinner.getSelectedItem());
@@ -76,6 +80,7 @@ public class IntroScreenActivity extends AppCompatActivity {
                     invalid.setText("");
                     Game.generateUniverse();
                     Game.createPlayer(name.getText().toString(), skillDis, (String) difficultySpinner.getSelectedItem());
+                    File file = new File(context.getFilesDir(), name.getText().toString());
                     startActivity(planetScreenIntent);
                 }
             }
