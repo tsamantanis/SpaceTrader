@@ -22,7 +22,6 @@ import com.example.spacetrader.model.MarketPlace;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.spacetrader.entity.Game.currentPlanet;
 import static com.example.spacetrader.entity.Game.marketPlace;
 import static com.example.spacetrader.entity.Game.player;
 import static com.example.spacetrader.entity.Game.travel;
@@ -49,7 +48,7 @@ public class UniverseScreenActivity extends AppCompatActivity {
         planetSpinner = findViewById(R.id.planetSpinner);
 
         location = findViewById(R.id.locationText);
-        location.setText("Location: " + Game.currentPlanet.getName());
+        location.setText("Location: " + player.getCurrentPlanet().getName());
 
         distance = findViewById(R.id.distance);
         fuelCost = findViewById(R.id.fuelcost);
@@ -113,10 +112,10 @@ public class UniverseScreenActivity extends AppCompatActivity {
                             if (planet != null) {
                                 Game.travel(planet);
                             }
-                            location.setText("Location: " + Game.currentPlanet.getName());
+                            location.setText("Location: " + player.getCurrentPlanet().getName());
                             distance.setText("Distance: " + Game.calculateDistance(planet));
                             fuelCost.setText("Fuel Cost: " + Game.calculateFuelPrice(planet));
-                            marketPlace = new MarketPlace(player, currentPlanet.getTechLevel());
+                            marketPlace = new MarketPlace(player, player.getCurrentPlanet().getTechLevel());
                         } else {
                             Toast.makeText(getApplicationContext(),"Not Enough Fuel!",Toast.LENGTH_SHORT).show();
                         }

@@ -3,11 +3,13 @@ package com.example.spacetrader.entity;
 import android.util.Log;
 
 public class Planet {
-    private final String NAME;
-    private final int X_COORDINATE;
-    private final int Y_COORDINATE;
-    private final int TECH_LEVEL;
-    private final int RESOURCE_LEVEL;
+    private String NAME;
+    private int X_COORDINATE;
+    private int Y_COORDINATE;
+    private int TECH_LEVEL;
+    private int RESOURCE_LEVEL;
+
+    public Planet() {}
 
     public Planet(String name, int x, int y) {
         this.NAME = name;

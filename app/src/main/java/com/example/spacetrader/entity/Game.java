@@ -1,6 +1,7 @@
 package com.example.spacetrader.entity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
@@ -24,56 +25,82 @@ import static android.content.ContentValues.TAG;
 
 public class Game {
     public static Player player;
-    public static Planet currentPlanet;
     public static List<Planet> planets;
     public static MarketPlace marketPlace;
     public static String playerID;
 
     public static void createPlayer(String name, int[] skillDistribution, String difficulty) {
         player = new Player(name, skillDistribution, difficulty);
-        marketPlace = new MarketPlace(player, currentPlanet.getTechLevel());
+        generateUniverse();
+        player.setCurrentPlanet(planets.get(3));
+        marketPlace = new MarketPlace(player, player.getCurrentPlanet().getTechLevel());
 
-        final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("players")
-                .add(player)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        playerID = documentReference.getId();
-                        db.collection("players").document(playerID).update(
-                                "currentPlanet", currentPlanet
-                        );
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + playerID);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+        savePlayer(null);
+
+//        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        db.collection("players")
+//                .add(player)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        playerID = documentReference.getId();
+//                        db.collection("players").document(playerID).update(
+//                                "currentPlanet", currentPlanet
+//                        );
+//                        Log.d(TAG, "DocumentSnapshot added with ID: " + playerID);
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w(TAG, "Error adding document", e);
+//                    }
+//                });
     }
 
     public static void savePlayer(final Context context) {
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("players")
-                .document(Game.playerID)
+                .document(Game.player.getName())
                 .set(Game.player)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        db.collection("players").document(playerID).update(
-                                "currentPlanet", currentPlanet
-                        );
+//                        db.collection("players").document(Game.player.getName()).update(
+//                                "currentPlanet", player.getCurrentPlanet()
+//                        );
                         Log.d("TAG", "DocumentSnapshot successfully written!");
-                        Toast.makeText(context, "Game saved", Toast.LENGTH_LONG).show();
+                        if (context != null) Toast.makeText(context, "Game saved", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("TAG", "Error writing document", e);
-                        Toast.makeText(context, "Game failed to saved", Toast.LENGTH_LONG).show();
+                        if (context != null) Toast.makeText(context, "Game failed to saved", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    public static void loadPlayer(String name, final Context context, final Intent intent) {
+        generateUniverse();
+        final FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("players")
+                .whereEqualTo("name", name)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                player = document.toObject(Player.class);
+                                marketPlace = new MarketPlace(player, player.getCurrentPlanet().getTechLevel());
+                                context.startActivity(intent);
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
                     }
                 });
     }
@@ -90,11 +117,10 @@ public class Game {
         planets.add(new Planet("Kafka", 75, 45));
         planets.add(new Planet("Rhaegon", 20, 40));
         planets.add(new Planet("Zuul", 8, 15));
-        currentPlanet = planets.get(3);
     }
 
     public static int calculateDistance(Planet planet) {
-        return (int) Math.sqrt(Math.pow(planet.getX() - currentPlanet.getX(), 2) + Math.pow(planet.getY() - currentPlanet.getY(), 2));
+        return (int) Math.sqrt(Math.pow(planet.getX() - player.getCurrentPlanet().getX(), 2) + Math.pow(planet.getY() - player.getCurrentPlanet().getY(), 2));
     }
 
     public static int calculateFuelPrice(Planet planet) {
@@ -104,7 +130,7 @@ public class Game {
     public static void travel(Planet planet) {
         int currentFuel = player.getSpaceship().getFuel();
         player.getSpaceship().setFuel(currentFuel - calculateFuelPrice(planet));
-        currentPlanet = planet;
+        player.setCurrentPlanet(planet);
     }
 
 }

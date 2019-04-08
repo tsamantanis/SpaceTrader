@@ -22,7 +22,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import static com.example.spacetrader.entity.Game.player;
-import static com.example.spacetrader.entity.Game.currentPlanet;
 
 public class PlanetScreenActivity extends AppCompatActivity {
 
@@ -37,7 +36,7 @@ public class PlanetScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planet_screen);
         planetLabel = findViewById(R.id.textView_currentPlanet);
-        planetLabel.setText(new StringBuilder().append("Planet ").append(currentPlanet.getName()));
+        if (player.getCurrentPlanet() != null) planetLabel.setText(new StringBuilder().append("Planet ").append(player.getCurrentPlanet().getName()));
 
         fuelRemaining = findViewById(R.id.textView_Fuel);
         fuelRemaining.setText("Fuel Remaining: " + player.getSpaceship().getFuel());

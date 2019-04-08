@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         loadGameButton = findViewById(R.id.loadGameButton);
 
         final Intent newGameIntent = new Intent(this, IntroScreenActivity.class);
-        final Intent loadGameIntent = new Intent(this, IntroScreenActivity.class);
+        final Intent loadGameIntent = new Intent(this, LoadGameActivity.class);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

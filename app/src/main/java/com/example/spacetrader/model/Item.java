@@ -15,6 +15,8 @@ public class Item {
     private int MTH;
     private int price;
 
+    public Item() {}
+
     public Item (String name, int MTLP, int MTLU, int TTP, int basePrice, int IPL,
                  int variance, String IE, String CR, String ER, int MTL, int MTH) {
         this.name = name;

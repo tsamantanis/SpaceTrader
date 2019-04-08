@@ -60,7 +60,7 @@ public class MarketplaceActivity extends AppCompatActivity {
 
         errorMessage = findViewById(R.id.errorMessageText);
         location = findViewById(R.id.locationText);
-        location.setText("Location: " + Game.currentPlanet.getName());
+        location.setText("Location: " + player.getCurrentPlanet().getName());
         fuelRemaining = findViewById(R.id.fuelRemainingText);
         fuelRemaining.setText("Fuel Remaining: " + player.getSpaceship().getFuel());
 

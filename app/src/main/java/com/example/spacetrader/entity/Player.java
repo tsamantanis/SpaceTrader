@@ -17,6 +17,8 @@ public class Player {
 
     private String weapon;
 
+    private Planet currentPlanet;
+
     public Player() {}
 
     public Player(String name, int[] skillDistribution, String difficulty) {
@@ -77,6 +79,14 @@ public class Player {
 
     public void setWeapon(String weapon) {
         this.weapon = weapon;
+    }
+
+    public Planet getCurrentPlanet() {
+        return this.currentPlanet;
+    }
+
+    public void setCurrentPlanet(Planet planet) {
+        this.currentPlanet = planet;
     }
 
 }
