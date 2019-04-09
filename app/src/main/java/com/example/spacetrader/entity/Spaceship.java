@@ -1,8 +1,11 @@
 package com.example.spacetrader.entity;
 
+import android.widget.Space;
+
 import com.example.spacetrader.model.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Spaceship {
 
@@ -10,7 +13,7 @@ public class Spaceship {
 
     private int cargoSpace;
 
-    private ArrayList<Item> cargo;
+    private List<Item> cargo;
 
     private int fuel;
 
@@ -41,11 +44,11 @@ public class Spaceship {
 
     public int getFuel() { return fuel; }
 
-    public ArrayList<Item> getCargo() {
+    public List<Item> getCargo() {
         return cargo;
     }
 
-    public void setCargo(ArrayList<Item> cargo) {
+    public void setCargo(List<Item> cargo) {
         this.cargo = cargo;
     }
 
