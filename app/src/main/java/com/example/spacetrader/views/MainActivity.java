@@ -10,7 +10,7 @@ import com.example.spacetrader.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button newGameButton, loadGameButton;
+    private Button newGameButton,   loadGameButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

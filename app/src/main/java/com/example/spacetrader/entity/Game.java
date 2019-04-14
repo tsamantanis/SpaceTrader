@@ -23,7 +23,8 @@ import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
-public class Game {
+public class
+Game {
     public static Player player;
     public static List<Planet> planets;
     public static MarketPlace marketPlace;
