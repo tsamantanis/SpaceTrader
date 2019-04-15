@@ -103,6 +103,16 @@ public class ExampleUnitTest {
     }
 
     @Test //Sophia
+    public void testCalculatePriceNullItem() {
+        Item j = null;
+        assertTrue(0 == j.calculatePrice());
+    }
+    @Test //Sophia
+    public void testCalculatePriceNonexistentItem() {
+        Item j = new Item();
+        assertTrue(0 == j.calculatePrice());
+    }
+    @Test //Sophia
     public void testCalculatePrice() {
         int v = 1;
         int b = 2;
