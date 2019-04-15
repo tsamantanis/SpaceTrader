@@ -8,6 +8,7 @@ import com.example.spacetrader.entity.Player;
 import com.example.spacetrader.model.Item;
 import com.example.spacetrader.model.MarketPlace;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,11 +24,14 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-    @Test
+
     MarketPlace marketplace;
     Player player;
+
+    @Before
     public void setup() {
-        player = new Player();
+        int[] skill = {4,4,4,4};
+        player = new Player("Zak", skill , "Beginner");
         player.setCredits(0);
         marketplace = new MarketPlace(player, 10);
     }
@@ -55,8 +59,9 @@ public class ExampleInstrumentedTest {
         ArrayList<Item> items = marketplace.getMarketItems();
         assertTrue(items.contains(water));
 
+        int oldCredits = player.getCredits();
         assertTrue(marketplace.sellItem(food));
-        assertEquals(player.getCredits(), player.getCredits() + food.getPrice());
+        assertEquals(player.getCredits(), oldCredits + food.getPrice());
         assertTrue(items.contains(food));
 
         assertTrue(spaceship.size() == 0);

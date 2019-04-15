@@ -66,7 +66,9 @@ public class MarketPlace {
                 && player.getSpaceship().getCargo().size() != player.getSpaceship().getCargoSpace()) {
             player.setCredits(player.getCredits() - item.getPrice());
             player.getSpaceship().addCargo(item);
-            marketItems.remove(item);
+            if(!marketItems.remove(item)) {
+                return false;
+            }
             return true;
         }
         return false;
