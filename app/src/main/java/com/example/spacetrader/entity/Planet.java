@@ -17,7 +17,7 @@ public class Planet {
         this.Y_COORDINATE = y;
         this.TECH_LEVEL = (int) (Math.random() * 8);
         this.RESOURCE_LEVEL = (int) (Math.random() * 13);
-        Log.d(NAME, this.toString());
+//        Log.d(NAME, this.toString());
     }
 
     public String getName() {

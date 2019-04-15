@@ -23,12 +23,13 @@ import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
-public class
-Game {
+public class Game {
     public static Player player;
     public static List<Planet> planets;
     public static MarketPlace marketPlace;
     public static String playerID;
+
+    public Game() {}
 
     public static void createPlayer(String name, int[] skillDistribution, String difficulty) {
         player = new Player(name, skillDistribution, difficulty);
@@ -132,6 +133,10 @@ Game {
         int currentFuel = player.getSpaceship().getFuel();
         player.getSpaceship().setFuel(currentFuel - calculateFuelPrice(planet));
         player.setCurrentPlanet(planet);
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
 }

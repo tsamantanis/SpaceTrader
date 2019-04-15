@@ -1,5 +1,7 @@
 package com.example.spacetrader;
 
+import com.example.spacetrader.entity.Game;
+import com.example.spacetrader.entity.Planet;
 import com.example.spacetrader.entity.Player;
 import com.example.spacetrader.model.Item;
 import com.example.spacetrader.model.MarketPlace;
@@ -27,6 +29,7 @@ public class ExampleUnitTest {
         int[] skill = {4, 4, 4, 4};
         player = new Player("Player", skill, "Beginner");
         marketPlace = new MarketPlace(player, 6);
+        player.setCurrentPlanet(new Planet("Castor", 65, 110));
     }
 
     //Sukhmai
@@ -103,11 +106,6 @@ public class ExampleUnitTest {
     }
 
     @Test //Sophia
-    public void testCalculatePriceNullItem() {
-        Item j = null;
-        assertTrue(0 == j.calculatePrice());
-    }
-    @Test //Sophia
     public void testCalculatePriceNonexistentItem() {
         Item j = new Item();
         assertTrue(0 == j.calculatePrice());
@@ -126,12 +124,20 @@ public class ExampleUnitTest {
 
     @Test //Suddy
     public void testPlanetChangeOnTravel() {
-
+        Planet aegon = new Planet("Aegon", 10, 130);
+        Planet oldPlanet = player.getCurrentPlanet();
+        player.travel(aegon); // travel to Aegon
+        assertNotEquals(oldPlanet, player.getCurrentPlanet()); // verify planet changed
+        assertEquals(aegon, player.getCurrentPlanet()); // verify new planet is correct
     }
 
     @Test //Suddy
     public void testFuelChangeOnTravel() {
-
+        Planet dany = new Planet("Daenerys", 50, 70);
+        int oldFuelAmount = player.getSpaceship().getFuel();
+        player.travel(dany); // travel to Daenerys
+        assertEquals(dany, player.getCurrentPlanet()); // verify planet is correct
+        assertNotEquals(player.getSpaceship().getFuel(), oldFuelAmount); // verify fuel has changed
     }
 
 

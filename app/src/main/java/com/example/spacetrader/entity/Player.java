@@ -3,6 +3,8 @@ package com.example.spacetrader.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.spacetrader.entity.Game.calculateFuelPrice;
+
 public class Player {
 
     private String name;
@@ -83,6 +85,20 @@ public class Player {
 
     public Planet getCurrentPlanet() {
         return this.currentPlanet;
+    }
+
+    public void travel(Planet planet) {
+        int currentFuel = this.getSpaceship().getFuel();
+        this.getSpaceship().setFuel(currentFuel - calculateFuelPrice(planet));
+        this.setCurrentPlanet(planet);
+    }
+
+    public int calculateDistance(Planet planet) {
+        return (int) Math.sqrt(Math.pow(planet.getX() - this.getCurrentPlanet().getX(), 2) + Math.pow(planet.getY() - this.getCurrentPlanet().getY(), 2));
+    }
+
+    public int calculateFuelPrice(Planet planet) {
+        return (int) (calculateDistance(planet) * 3.5);
     }
 
     public void setCurrentPlanet(Planet planet) {
