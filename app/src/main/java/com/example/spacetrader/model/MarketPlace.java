@@ -51,7 +51,7 @@ public class MarketPlace {
     }
 
     public boolean sellItem(Item item) {
-        if(item != null) {
+        if (item != null) {
             player.setCredits(player.getCredits() + item.getPrice());
             marketItems.add(item);
             player.getSpaceship().removeCargo(item);
