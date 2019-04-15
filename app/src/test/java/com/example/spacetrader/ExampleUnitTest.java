@@ -7,6 +7,9 @@ import com.example.spacetrader.model.MarketPlace;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -65,5 +68,49 @@ public class ExampleUnitTest {
         Item item = new Item("Zooks", 0, 0, 2, 30, 3,
                 4, "No Zooks", "Lots of Zooks", "Zookland", 5, 5);
         assertFalse(marketPlace.buyItem(item));
+    }
+
+    @Test //Mark
+    public void testSellNullItem() {
+        assertFalse(marketPlace.sellItem(null));
+    }
+    @Test //Mark
+    public void testSellItemUpdateCredits() {
+        Item water = new Item("Water", 0, 0, 2, 30, 3,
+                4, "Drought", "Lots of Water", "Desert", 30, 50);
+        player.setCredits(0);
+        assertTrue(marketPlace.sellItem(water));
+
+        assertEquals(player.getCredits(), water.getPrice());
+    }
+    @Test //Mark
+    public void testMarketPlaceUpdatedAfterSell() {
+        Item water = new Item("Water", 0, 0, 2, 30, 3,
+                4, "Drought", "Lots of Water", "Desert", 30, 50);
+        marketPlace.sellItem(water);
+
+        ArrayList<Item> items = marketPlace.getMarketItems();
+        assertTrue(items.contains(water));
+    }
+    @Test //Mark
+    public void testSpaceshipUpdatedAfterSell() {
+        List<Item> spaceship = player.getSpaceship().getCargo();
+        Item water = new Item("Water", 0, 0, 2, 30, 3,
+                4, "Drought", "Lots of Water", "Desert", 30, 50);
+        spaceship.add(water);
+        marketPlace.sellItem(water);
+        assertTrue(spaceship.size() == 0);
+    }
+
+    @Test //Sophia
+    public void testCalculatePrice() {
+        int v = 1;
+        int b = 2;
+        int t = 4;
+        int m = 3;
+        int i = 5;
+        Item j = new Item("j", m, 2, t, b, i, v, "j", "j", "j", 1, 2);
+        assertTrue("Calculated Price Out of Expected Range", 6.45 < j.calculatePrice()
+                && 8.1 > j.calculatePrice());
     }
 }
