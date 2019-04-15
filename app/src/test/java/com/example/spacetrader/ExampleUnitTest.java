@@ -113,4 +113,16 @@ public class ExampleUnitTest {
         assertTrue("Calculated Price Out of Expected Range", 6.45 < j.calculatePrice()
                 && 8.1 > j.calculatePrice());
     }
+
+    @Test //Suddy
+    public void testPlanetChangeOnTravel() {
+
+    }
+
+    @Test //Suddy
+    public void testFuelChangeOnTravel() {
+
+    }
+
+
 }
