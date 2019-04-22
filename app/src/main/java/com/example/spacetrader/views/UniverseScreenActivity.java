@@ -1,7 +1,9 @@
 package com.example.spacetrader.views;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,7 +29,6 @@ import static com.example.spacetrader.entity.Game.player;
 import static com.example.spacetrader.entity.Game.travel;
 
 public class UniverseScreenActivity extends AppCompatActivity {
-    //private Planet[] planetList;
     private Spinner planetSpinner;
 
     private TextView location;
@@ -40,6 +41,7 @@ public class UniverseScreenActivity extends AppCompatActivity {
     private Button backButton;
 
     private static List<Event> events;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,8 +161,4 @@ public class UniverseScreenActivity extends AppCompatActivity {
 
         });
     }
-
-
-
-
 }

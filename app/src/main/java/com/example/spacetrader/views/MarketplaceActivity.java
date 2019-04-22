@@ -1,5 +1,6 @@
 package com.example.spacetrader.views;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,6 +39,7 @@ public class MarketplaceActivity extends AppCompatActivity {
     private TextView cargoSpace;
 
     protected static Player player;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +109,7 @@ public class MarketplaceActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String marketGoods = (String) marketGoodsSpinner.getSelectedItem();
                 for (Item item : Game.marketPlace.getMarketItems()) {
-                    if(marketGoods.equals(item.getName())) {
+                    if (marketGoods.equals(item.getName())) {
                         marketGoodsPrice.setText(Integer.toString(item.getPrice()));
                     }
                 }
@@ -195,6 +197,4 @@ public class MarketplaceActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

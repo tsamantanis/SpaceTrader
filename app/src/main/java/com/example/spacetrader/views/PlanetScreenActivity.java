@@ -2,6 +2,7 @@ package com.example.spacetrader.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class PlanetScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_planet_screen);
         planetLabel = findViewById(R.id.textView_currentPlanet);
         if (player.getCurrentPlanet() != null) planetLabel.setText(new StringBuilder().append("Player: ").append(player.getName()));
+
 
         fuelRemaining = findViewById(R.id.textView_Fuel);
         fuelRemaining.setText("Fuel Remaining: " + player.getSpaceship().getFuel());
